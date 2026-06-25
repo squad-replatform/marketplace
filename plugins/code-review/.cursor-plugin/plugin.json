@@ -1,0 +1,10 @@
+{
+  "name": "code-review",
+  "version": "0.1.0",
+  "description": "Review de Pull Request (URL, repo+numero, ou via work item Jira) com contexto do card via atlassian-assistant.",
+  "author": {
+    "name": "Natura GSP"
+  },
+  "keywords": ["code-review", "review", "pr", "jira", "quality"],
+  "logo": "assets/logo.svg"
+}

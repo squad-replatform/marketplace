@@ -1,0 +1,36 @@
+---
+description: Entrada obrigatoria de discovery do GSP. Antes de buscar ou ler codigo do repositorio para compreender qualquer torre, sistema ou projeto do GSP (qualquer profundidade), ou seus padroes de codigo/arquitetura, inicie consultando as skills/rules deste plugin.
+alwaysApply: true
+---
+
+# GSP — Entrada obrigatoria de discovery
+
+Sempre que uma tarefa envolver compreender qualquer projeto/repo/servico do GSP (qualquer profundidade), ou seus padroes de codigo/arquitetura, INICIE o discovery pelas skills/rules do plugin `gsp-guidelines` ANTES de buscar/ler codigo do repositorio.
+
+## Quando se aplica
+
+- Localizar, explicar, projetar, investigar ou revisar qualquer torre, sistema ou projeto do GSP.
+- Perguntas sobre arquitetura, integracoes, convencoes de codigo, stack, testes ou divida tecnica do GSP.
+- Vale tambem para tarefas rapidas ou de inspecao rasa — nao pule esta entrada.
+
+## Ordem de discovery
+
+1. Localize o alvo na skill `gsp-towers-catalog` (numeracao 01..20, classificacao DDD, nomes autoritativos de torre/projeto).
+2. Carregue a(s) skill(s) por intencao:
+   - arquitetura, archetypes, fluxos -> `gsp-architecture`
+   - mensageria, eventos, auth, BFF, Capta -> `gsp-integrations`
+   - naming, estrutura, error handling -> `gsp-code-conventions`
+   - stack Node, frontend MFE, legado Java -> `gsp-stack`
+   - testes, thresholds DDD -> `gsp-testing-standards`
+   - gotchas, riscos, divida tecnica -> `gsp-tech-debt`
+3. So entao leia o codigo do repo, usando as skills como mapa. Reconcilie divergencias com o estado atual (skills refletem 2026-06).
+
+## Faca
+
+- Trate os nomes de torre/projeto/evento/campo das skills como fonte autoritativa (ver `gsp-content-fidelity`).
+- Use a skill carregada para orientar onde buscar antes de varrer o repositorio.
+
+## Nao faca
+
+- Nao inicie o discovery lendo codigo do repo ou rodando buscas amplas antes de consultar as skills `gsp-*`.
+- Nao invente nomes de torre, projeto, evento ou archetype; se nao constar, diga que nao consta.

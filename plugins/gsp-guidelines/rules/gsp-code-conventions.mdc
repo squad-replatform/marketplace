@@ -1,0 +1,24 @@
+---
+description: Regras normativas de convencoes de codigo do GSP (naming kebab/Pascal/camel, imports, estrutura de Command, error handling, testes *.spec.js, Environments.yaml, excecoes das torres 01/04/20). Carregar ao escrever ou revisar codigo JS/TS de torres Node, MFE ou config do GSP.
+alwaysApply: false
+---
+
+# GSP — Regras de Convencoes de Codigo
+
+Normas acionaveis durante edicao de codigo. Para exemplos completos e detalhes por torre, use a skill `gsp-code-conventions`.
+
+## Faca
+
+- Nomeie arquivos em kebab-case (`create-order-command.js`), classes em PascalCase (`CreateOrderCommand`), funcoes/metodos em camelCase (`getFormattedMessages`). `index.js` e o barrel padrao.
+- Enums como objetos congelados: chave camelCase no export, valores estaveis (`typeMessages.orderCreate` -> `'order-create'`).
+- Ordene imports: libs externas (`globalsales-*`, `node-base`) primeiro, depois modulos internos relativos.
+- Centralize mensagens de erro em `src/commons/messages.js` (ou `src/domain/messages/`) com codigos; logue erros com `App.Logger.current().error({...})` no `catch`.
+- Coloque testes em `test/unit/` e `test/integration/` (nao em `src/`), nomeados `*.spec.js`, configurados via `test.json`.
+- Use `Environments.yaml` + `parameter://` / `secretsManager://` para configuracao.
+
+## Nao faca
+
+- Nao aplique o padrao `App.Command` em `commons-authorizer` (usa `application/`+`infrastructure/`, env via `config/env.ts`).
+- Nao acesse `captacao-persistencia` direto a partir de WAR/GWT em 20.capta — passe por `captacao-negocio`.
+- Nao use Redux global para estado cross-MFE; use `gsp-microfrontend-state` (Zustand).
+- Nao adicione comentarios redundantes; o codigo operacional do GSP mantem comentarios minimos (JSDoc apenas em presenters complexos).

@@ -1,0 +1,10 @@
+{
+  "name": "gsp-guidelines",
+  "version": "0.1.0",
+  "description": "Guidelines consolidados de arquitetura, integracoes, convencoes de codigo e apresentacao de sistemas, torres e projetos do GSP.",
+  "author": {
+    "name": "Natura GSP"
+  },
+  "keywords": ["gsp", "architecture", "guidelines", "conventions", "towers"],
+  "logo": "assets/logo.svg"
+}

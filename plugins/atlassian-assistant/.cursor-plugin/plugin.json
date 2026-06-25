@@ -1,0 +1,11 @@
+{
+  "name": "atlassian-assistant",
+  "version": "0.1.0",
+  "description": "Leitura e escrita em Jira e Confluence via MCP, com config dirigida por Environments.yaml (cloudId, projectKey, spaceKey do time).",
+  "author": {
+    "name": "Natura GSP"
+  },
+  "keywords": ["atlassian", "jira", "confluence", "mcp"],
+  "logo": "assets/logo.svg",
+  "mcp": "./mcp.json"
+}

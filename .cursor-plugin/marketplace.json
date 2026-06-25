@@ -1,0 +1,29 @@
+{
+  "name": "gsp-replatform-tools",
+  "owner": {
+    "name": "Natura GSP",
+    "email": "gsp@natura.com"
+  },
+  "metadata": {
+    "description": "Replatform tools for Natura GSP Cursor plugins",
+    "version": "0.1.0",
+    "pluginRoot": "plugins"
+  },
+  "plugins": [
+    {
+      "name": "gsp-guidelines",
+      "source": "gsp-guidelines",
+      "description": "Guidelines de arquitetura, integracoes, convencoes e apresentacao de sistemas/torres/projetos do GSP."
+    },
+    {
+      "name": "atlassian-assistant",
+      "source": "atlassian-assistant",
+      "description": "Leitura e escrita em Jira e Confluence via MCP, com config por Environments.yaml."
+    },
+    {
+      "name": "code-review",
+      "source": "code-review",
+      "description": "Review de PR (URL, repo+numero, ou via work item Jira) com contexto do card via atlassian-assistant."
+    }
+  ]
+}

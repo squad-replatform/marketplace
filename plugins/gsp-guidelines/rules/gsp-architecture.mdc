@@ -1,0 +1,23 @@
+---
+description: Regras normativas de arquitetura do GSP (microservices event-driven, archetypes, padrao App.Command, envelope MessagePresenter, listener pattern, dual-path de pedido). Carregar ao projetar, criar ou revisar codigo de torres Node, frontend MFE ou legado Capta do GSP.
+alwaysApply: false
+---
+
+# GSP — Regras de Arquitetura
+
+Normas acionaveis durante edicao de codigo. Para fluxos completos, schemas e exemplos, use a skill `gsp-architecture`.
+
+## Faca
+
+- Identifique o archetype do projeto pelo sufixo do nome (`*-api`, `*-listener`/`*-listerner`, `*-process`, `*-domain`, `*-repository`) e siga a estrutura `src/` correspondente.
+- Em torres Node, implemente handlers como `App.Command` com `async execute(params)`: `try` com `this.emit(success, ...)` e `catch` com log + `this.emit(error, ...)`.
+- Em listeners, registre o roteamento em `infrastructure/queue-routes.js` mapeando `typeMessages.<tipo>` para uma `CommandFactory`. Sempre leia `queue-routes.js` para descobrir o evento consumido — nunca infira pelo nome do projeto.
+- Ao publicar evento, use o envelope `MessagePresenter`: `{ companyId, countryCode, type, order, headers }`, com `type` vindo do enum `typeMessages`.
+- Em 20.capta (Maven), respeite a regra de camadas: apresentacao (WAR/GWT) chama apenas `captacao-negocio`; nunca acesse `captacao-persistencia` diretamente.
+
+## Nao faca
+
+- Nao compartilhe `src/commons/` entre repositorios (cada projeto e isolado).
+- Nao trate `commons-authorizer` como torre de dominio: ele usa `application/` vs `infrastructure/`, sem `App.Command` e sem SNS.
+- Nao assuma que a torre 20.capta participa do barramento SNS/SQS — ela e SoR Oracle, integrada via `capta-proxy` (HTTP) e `cart-update` (SNS publicado por capta-proxy).
+- Nao mude valores string do enum `typeMessages` sem avaliar blast radius: eles sao o contrato de routing (Published Language) entre produtores e consumidores.

@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" width="64" height="64">
+  <rect width="64" height="64" rx="12" fill="#0052CC"/>
+  <!-- J for Jira -->
+  <text x="14" y="42" font-family="monospace" font-size="28" font-weight="bold" fill="#FFFFFF">J</text>
+  <!-- C for Confluence -->
+  <text x="34" y="42" font-family="monospace" font-size="28" font-weight="bold" fill="#00B8D9">C</text>
+  <!-- connector dot -->
+  <circle cx="32" cy="48" r="2.5" fill="#FFFFFF" opacity="0.6"/>
+</svg>

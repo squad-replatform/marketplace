@@ -1,0 +1,23 @@
+---
+description: Regras normativas de integracoes do GSP (mensageria SNS/SQS, eventos criticos, auth Kong/Cognito/OAM, bancos PostgreSQL/Oracle/ScyllaDB/Redis, BFF Apollo, ponte Capta, contratos Pact). Carregar ao mexer em mensageria, eventos, autenticacao, acesso a dados ou integracao entre torres do GSP.
+alwaysApply: false
+---
+
+# GSP — Regras de Integracoes
+
+Normas acionaveis durante edicao de codigo. Para tabelas completas, enum typeMessages e blast radius, use a skill `gsp-integrations`.
+
+## Faca
+
+- Publique/consuma eventos via AWS SNS + SQS usando `iris-nodejs-messenger`; ARNs vem de `parameter://...`.
+- Trate os eventos criticos pelo produtor correto: `cart-convertion` (cart-api), `order-create` (orders-api), `parameter-updated` (02.parameters), `cart-update` (capta-proxy, NAO cart-api).
+- Ao consumir evento de orders-api, valide o payload com schema explicito e cheque o blast radius dos campos usados (ver skill) antes de alterar `GetOrderPresenter`.
+- Use o banco correto por contexto: PostgreSQL 14 (orders/cart/payment/shipping), Oracle (SoR legado Capta), ScyllaDB (availability/products), Redis (cache consultora, tokens, sessao capta-proxy).
+- Roteie chamadas de frontend pelo BFF `frontend-supergraphql` (subgraphs `legacy` + `profile`).
+
+## Nao faca
+
+- Nao confie no nome do listener para deduzir o evento consumido (ex.: `payment-cart-listener` consome `cart-deleted`, nao eventos de orders-api). Cheque `queue-routes.js`.
+- Nao use `Joi.any()` como schema de validacao de evento — defina os campos reais (ver gotcha na skill `gsp-tech-debt`).
+- Nao assuma que `capta-proxy` ou `al-showcase` estao federados no supergraph: o `supergraph-config.yaml` versionado contem apenas `legacy` + `profile`.
+- Nao introduza credenciais hardcoded (`JWT_SECRET`, tokens) em `Environments.yaml` — use `parameter://` ou `secretsManager://`.
