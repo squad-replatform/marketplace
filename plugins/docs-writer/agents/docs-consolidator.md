@@ -45,6 +45,8 @@ Ler:
 
 Para cada tipo em `output_paths`:
 - Ler o template correspondente em `skills/docs-writer/templates/<tipo>.md`.
+  - `backlog` -> `templates/backlog.md` (visao geral do conjunto; tabela de tasks)
+  - `task` -> `templates/task.md` (work item individual, shape JGR)
 - Internalizar as secoes fixas e a ordem obrigatoria.
 - Aplicar os principios da skill `doc-style` (tom, voz, concisao, tabelas, diagramas).
 
@@ -58,8 +60,9 @@ Para cada tipo em `output_paths`:
 4. Para secoes sem dados suficientes: escrever `N/A - <motivo breve>` OU registrar como `> [!QUESTAO] <lacuna>` na secao "Questoes em aberto" do doc.
 5. Aplicar encadeamento:
    - TDD: se o PRD de mesmo slug ja existir em `.docs/<tema>/prd/`, preencher `prd:` no frontmatter e a secao "PRD relacionado" com link relativo.
-   - tasks: linkar TDD(s) e PRD de mesmo slug na secao "Contexto / docs de origem".
-   - PRD: secao "Documentos derivados" lista TDD/tasks de mesmo slug se ja existirem, senao `pendente`.
+   - backlog: linkar TDD(s) e PRD de mesmo slug na secao "Contexto / docs de origem". Cada celula Titulo na tabela deve conter link relativo para o `T<NN>-...md` quando o work item existir.
+   - task: preencher `relacionados` com links para o backlog, TDD(s) e PRD do tema.
+   - PRD: secao "Documentos derivados" lista TDD/backlog/tasks de mesmo slug se ja existirem, senao `pendente`.
 6. Verificar se o arquivo de destino ja existe. Se sim, CONFIRMAR sobrescrita com o orquestrador antes de gravar.
 7. Criar diretorios faltantes e gravar o arquivo.
 

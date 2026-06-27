@@ -3,8 +3,9 @@ name: docs-writer
 description: >
   Metodologia completa do plugin docs-writer: 5 estrategias, pipeline obrigatorio de 3 fases
   (Extracao -> Sintese -> Consolidacao), politica de modelos, naming/slug/tema, numeracao de
-  arquivos, encadeamento PRD->TDD->tasks, contrato de arquivos temporarios e regras hard-constrained
-  de templates. Use ao executar /write-docs ou ao implementar qualquer fase do pipeline.
+  arquivos, encadeamento PRD->TDD->backlog->task, contrato de arquivos temporarios e regras
+  hard-constrained de templates. Use ao executar /write-docs ou ao implementar qualquer fase
+  do pipeline.
 ---
 
 # Skill: docs-writer
@@ -17,9 +18,9 @@ A estrategia define QUAIS docs serao gerados. Todas passam pelas 3 fases.
 
 | # | Trigger | Docs gerados |
 |---|---------|-------------|
-| 1 | `kind=theme`, sem PRD no tema | PRD -> TDD(s) -> tasks |
-| 2 | `kind=theme`, PRD existe, sem TDD | TDD(s) -> tasks |
-| 3 | `kind=theme`, PRD + TDD(s) existem | tasks |
+| 1 | `kind=theme`, sem PRD no tema | PRD -> TDD(s) -> backlog |
+| 2 | `kind=theme`, PRD existe, sem TDD | TDD(s) -> backlog |
+| 3 | `kind=theme`, PRD + TDD(s) existem | backlog |
 | 4 | `kind=adr` | 1 ADR (agrupado se `cod` presente, solto se ausente) |
 | 5 | `kind=rfc` | 1 RFC (agrupado se `cod` presente, solto se ausente) |
 
@@ -44,7 +45,7 @@ A estrategia define QUAIS docs serao gerados. Todas passam pelas 3 fases.
 
 ## Convencao de paths em `.docs`
 
-### Agrupado por tema (PRD, TDD, tasks; ADR/RFC com `cod`)
+### Agrupado por tema (PRD, TDD, backlog, task; ADR/RFC com `cod`)
 
 ```
 .docs/<COD>-<desc_snake>/<tipo>/<tipo><NN>-<slug>.md
@@ -55,6 +56,18 @@ A estrategia define QUAIS docs serao gerados. Todas passam pelas 3 fases.
   - `.docs/E1-split_cd/prd/prd01-split-de-cd-no-checkout.md`
   - `.docs/E1-split_cd/tdd/tdd01-split-de-cd-no-checkout.md`
   - `.docs/E1-split_cd/adr/adr01-escolha-do-banco-de-eventos.md`
+
+#### Work items (task) dentro de um tema
+
+Cada linha do backlog pode ser expandida em um arquivo individual:
+
+```
+.docs/<COD>-<desc_snake>/tasks/T<NN>-<slug>.md
+```
+
+- `<NN>` = 2 digitos que correspondem ao ID da linha no backlog (T01, T02, ...).
+- `<slug>` = titulo da task em kebab-case ASCII.
+- O arquivo `tasks<NN>-<slug>.md` (backlog) permanece como ponto de entrada do conjunto; os arquivos `T<NN>-...` sao os work items individuais.
 
 ### Solto (ADR/RFC sem `cod`)
 
@@ -69,11 +82,12 @@ Criar diretorios faltantes. Se o arquivo ja existir, confirmar sobrescrita antes
 
 ## Encadeamento (chain)
 
-A cadeia PRD -> TDD -> tasks vive DENTRO DO MESMO TEMA, ligada pelo `slug`.
+A cadeia PRD -> TDD -> backlog -> task vive DENTRO DO MESMO TEMA, ligada pelo `slug`.
 
 - **TDD**: se existe `.docs/<tema>/prd/*-<slug>.md`, preencher `prd:` no frontmatter e secao "PRD relacionado" (link relativo `../prd/...`).
-- **tasks**: linkar TDD(s) e PRD de mesmo slug no tema (secao "Contexto / docs de origem").
-- **PRD**: secao "Documentos derivados" lista TDD/tasks de mesmo slug se ja existirem, senao `pendente`.
+- **backlog**: linkar TDD(s) e PRD de mesmo slug no tema (secao "Contexto / docs de origem"). Cada celula Titulo na tabela de tarefas deve conter um link relativo para o `T<NN>-...md` correspondente quando o work item existir.
+- **task**: preencher `relacionados` com links para o backlog, TDD(s) e PRD do tema. Secao "Notas tecnicas" deve referenciar dependencias de outras tasks.
+- **PRD**: secao "Documentos derivados" lista TDD/backlog/tasks de mesmo slug se ja existirem, senao `pendente`.
 - **RFC/ADR**: alheios a cadeia, mas tem secao "Referencias" para citar/ser citados. Agrupados no mesmo tema usam links relativos dentro de `.docs/<tema>/`.
 
 ## Contrato de arquivos temporarios
@@ -164,6 +178,9 @@ Estrutura por tipo (ver `templates/` para o template completo):
 - **TDD** (`templates/tdd.md`): 1 Resumo tecnico — 2 PRD relacionado/contexto — 3 Objetivos tecnicos e escopo — 4 Arquitetura proposta (Mermaid obrigatorio) — 5 Modelo de dados — 6 APIs/contratos/eventos — 7 Alternativas consideradas — 8 Impactos — 9 Plano de testes — 10 Rollout/rollback — 11 Riscos tecnicos — 12 Tarefas derivadas
 - **RFC** (`templates/rfc.md`): 1 Resumo — 2 Motivacao — 3 Proposta detalhada — 4 Alternativas consideradas — 5 Impacto e compatibilidade — 6 Plano de adocao — 7 Questoes em aberto — 8 Referencias
 - **ADR** (`templates/adr.md`): 1 Contexto e problema — 2 Drivers da decisao — 3 Opcoes consideradas — 4 Decisao — 5 Consequencias — 6 Referencias
-- **tasks** (`templates/tasks.md`): 1 Contexto/docs de origem — 2 Resumo do escopo — 3 Lista de tarefas — 4 Sequenciamento/marcos — 5 Riscos e bloqueios — 6 Definition of Done global
+- **backlog** (`templates/backlog.md`): 1 Contexto/docs de origem — 2 Resumo do escopo — 3 Lista de tarefas — 4 Sequenciamento/marcos — 5 Riscos e bloqueios — 6 Definition of Done global
+- **task** (`templates/task.md`): 1 Metadados — 2 Contexto — 3 Objetivo — 4 Requisitos tecnicos — 5 Criterios de aceite — 6 Notas tecnicas — 7 Definition of Done
 
 Frontmatter YAML obrigatorio em cada doc: `tipo`, `titulo`, `slug|numero`, `status`, `autor`, `data`, `tema`, `relacionados`.
+
+Frontmatter adicional para `task`: `id` (T-NN), `jira` (JGR-xxx ou pendente), `tipo_item` (feat/fix/chore/test/doc), `story_points`, `depende_de`.

@@ -1,7 +1,7 @@
 ---
 name: write-docs
 description: >
-  Gera design docs (PRD, TDD, RFC, ADR, tasks) em PT-BR a partir de Jira, Confluence e codebase.
+  Gera design docs (PRD, TDD, RFC, ADR, backlog, task) em PT-BR a partir de Jira, Confluence e codebase.
   Uso: /write-docs <kind> [<cod>] <assunto> [--from scratch|prd|prd-tdd]. Orquestra o pipeline
   obrigatorio de 3 fases (Extracao -> Sintese -> Consolidacao) e agrupa output em .docs/.
 ---
@@ -163,7 +163,8 @@ Exibir ao usuario:
 Docs gerados com sucesso:
 - .docs/E1-split_cd/prd/prd01-split-de-cd-no-checkout.md
 - .docs/E1-split_cd/tdd/tdd01-split-de-cd-no-checkout.md
-- .docs/E1-split_cd/tasks/tasks01-split-de-cd-no-checkout.md
+- .docs/E1-split_cd/tasks/tasks01-split-de-cd-no-checkout.md  (backlog)
+- .docs/E1-split_cd/tasks/T01-profile-distribution-centers.md  (task work item)
 
 Arquivos de trabalho em: .docs/.work/<run-id>/
 ```

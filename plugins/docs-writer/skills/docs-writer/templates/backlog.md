@@ -1,5 +1,5 @@
 ---
-tipo: tasks
+tipo: backlog
 titulo: ""
 slug: ""
 status: rascunho
@@ -9,7 +9,7 @@ tema: ""
 relacionados: []
 ---
 
-# Tasks — {{titulo}}
+# Backlog — {{titulo}}
 
 ## 1 Contexto / docs de origem
 
