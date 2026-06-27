@@ -1,0 +1,17 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" width="64" height="64">
+  <rect width="64" height="64" rx="12" fill="#1A1A2E"/>
+  <!-- document stack -->
+  <rect x="10" y="18" width="28" height="36" rx="3" fill="#263238"/>
+  <rect x="14" y="14" width="28" height="36" rx="3" fill="#37474F"/>
+  <rect x="18" y="10" width="28" height="36" rx="3" fill="#455A64"/>
+  <!-- lines on top doc -->
+  <line x1="23" y1="20" x2="40" y2="20" stroke="#80CBC4" stroke-width="2" stroke-linecap="round"/>
+  <line x1="23" y1="26" x2="40" y2="26" stroke="#80CBC4" stroke-width="2" stroke-linecap="round"/>
+  <line x1="23" y1="32" x2="34" y2="32" stroke="#546E7A" stroke-width="2" stroke-linecap="round"/>
+  <!-- pencil -->
+  <g transform="rotate(-45 48 44)">
+    <rect x="44" y="36" width="8" height="16" rx="1" fill="#FFB74D"/>
+    <polygon points="44,52 52,52 48,58" fill="#FFCC80"/>
+    <rect x="44" y="36" width="8" height="4" rx="1" fill="#78909C"/>
+  </g>
+</svg>

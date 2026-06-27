@@ -1,0 +1,12 @@
+{
+  "version": 1,
+  "hooks": {
+    "postToolUse": [
+      {
+        "matcher": "Write",
+        "command": "python3 .marketplace/plugins/docs-writer/scripts/update-related-docs.py",
+        "timeout": 10
+      }
+    ]
+  }
+}

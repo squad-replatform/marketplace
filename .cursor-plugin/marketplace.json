@@ -24,6 +24,11 @@
       "name": "code-review",
       "source": "code-review",
       "description": "Review de PR (URL, repo+numero, ou via work item Jira) com contexto do card via atlassian-assistant."
+    },
+    {
+      "name": "docs-writer",
+      "source": "docs-writer",
+      "description": "Gera design docs (PRD, TDD, RFC, ADR, tasks) em PT-BR via /docs, com pipeline de 3 fases (Extracao -> Sintese -> Consolidacao) e templates hard-constrained por tipo."
     }
   ]
 }

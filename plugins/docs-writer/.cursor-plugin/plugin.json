@@ -1,0 +1,11 @@
+{
+  "name": "docs-writer",
+  "version": "0.2.0",
+  "description": "Gera design docs (PRD, TDD, RFC, ADR, tasks) em PT-BR via comando /docs, com pipeline obrigatorio de 3 fases (Extracao -> Sintese -> Consolidacao) e templates hard-constrained por tipo.",
+  "author": {
+    "name": "Natura GSP"
+  },
+  "keywords": ["docs", "prd", "tdd", "rfc", "adr", "tasks", "design-docs", "documentation"],
+  "logo": "assets/logo.svg",
+  "hooks": "hooks.json"
+}

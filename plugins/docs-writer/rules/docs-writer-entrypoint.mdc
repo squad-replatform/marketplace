@@ -1,0 +1,55 @@
+---
+description: >
+  Avalia o uso do comando /write-docs quando o prompt for semanticamente criar, escrever ou gerar
+  design docs (PRD, TDD, RFC, ADR, tasks) a partir de um PRD, TDD, diretorio de docs ou do zero.
+  Sugere o comando /write-docs correspondente; nao bloqueia o usuario se ele pedir outra coisa.
+alwaysApply: true
+---
+
+# docs-writer-entrypoint
+
+Avalie se o plugin `docs-writer` deve ser acionado sempre que o prompt do usuario tiver intencao semantica de criar ou escrever design docs.
+
+## Quando acionar
+
+Reconhecer a intencao por **similaridade semantica** (nao por match exato de palavras). Os padroes abaixo sao exemplos, nao regex exatas:
+
+- "crie/escreva/gera docs para `<prd>`"
+- "crie/escreva/gera docs com base em `<prd>` `<tdd1>` ... `<tddn>`"
+- "crie/escreva/gera docs a partir de `<diretorio com docs>`"
+- "escreve um PRD para ..."
+- "escreve um TDD para ..."
+- "cria tasks para ..."
+- "preciso de um ADR sobre ..."
+- "escreve uma RFC para ..."
+
+Verbos de intencao: criar, escrever, gerar, montar, elaborar, produzir, redigir.
+Objetos: PRD, TDD, RFC, ADR, tasks, design doc, documento tecnico, especificacao.
+
+## Mapeamento para estrategia
+
+| Prompt semantico | Estrategia | Comando sugerido |
+|-----------------|-----------|-----------------|
+| Sem PRD/TDD existentes | 1 (do zero) | `/write-docs theme <cod> <assunto>` |
+| So PRD fornecido/existente | 2 (a partir de PRD) | `/write-docs theme <cod> <assunto> --from prd` |
+| PRD + TDDs fornecidos/existentes | 3 (a partir de PRD+TDDs) | `/write-docs theme <cod> <assunto> --from prd-tdd` |
+| "ADR sobre ..." | 4 (ADR isolado) | `/write-docs adr [<cod>] <assunto>` |
+| "RFC para ..." | 5 (RFC isolado) | `/write-docs rfc [<cod>] <assunto>` |
+| Diretorio de docs informado | Inferir pelo que ja existe em `.docs/<COD>-*/` | `/write-docs theme <cod> <assunto> [--from ...]` |
+
+## Comportamento
+
+1. Identificar a intencao e mapear para a estrategia correta.
+2. Se `cod` (codigo do tema) nao estiver claro no prompt, perguntar antes de sugerir o comando.
+3. Propor o comando `/write-docs ...` correspondente ao usuario, explicando brevemente o que sera gerado.
+4. **Nao e um bloqueio**: se o usuario pedir explicitamente outra coisa (ex.: editar um doc existente manualmente), seguir o pedido sem insistir.
+5. Se o usuario confirmar o comando sugerido, executar diretamente.
+
+## Exemplo
+
+Usuario: "cria um PRD para o projeto de split de CD no checkout, codigo E1"
+Resposta sugerida:
+> Vou usar o plugin `docs-writer`. O comando seria:
+> `/write-docs theme E1 split de CD no checkout`
+> Isso vai gerar PRD -> TDD(s) -> tasks em `.docs/E1-split_cd/`.
+> Confirma?
