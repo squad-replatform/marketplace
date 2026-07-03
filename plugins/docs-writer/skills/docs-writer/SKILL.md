@@ -179,7 +179,7 @@ Estrutura por tipo (ver `templates/` para o template completo):
 - **RFC** (`templates/rfc.md`): 1 Resumo — 2 Motivacao — 3 Proposta detalhada — 4 Alternativas consideradas — 5 Impacto e compatibilidade — 6 Plano de adocao — 7 Questoes em aberto — 8 Referencias
 - **ADR** (`templates/adr.md`): 1 Contexto e problema — 2 Drivers da decisao — 3 Opcoes consideradas — 4 Decisao — 5 Consequencias — 6 Referencias
 - **backlog** (`templates/backlog.md`): 1 Contexto/docs de origem — 2 Resumo do escopo — 3 Lista de tarefas — 4 Sequenciamento/marcos — 5 Riscos e bloqueios — 6 Definition of Done global
-- **task** (`templates/task.md`): 1 Metadados — 2 Contexto — 3 Objetivo — 4 Requisitos tecnicos — 5 Criterios de aceite — 6 Notas tecnicas — 7 Definition of Done
+- **task** (`templates/task.md`): 1 Metadados — 2 Contexto — 3 Objetivo — 4 Requisitos e criterios de aceite — 5 Especificacao tecnica — 6 Como executar — 7 Dependencias e referencias — 8 Definition of Done
 
 Frontmatter YAML obrigatorio em cada doc: `tipo`, `titulo`, `slug|numero`, `status`, `autor`, `data`, `tema`, `relacionados`.
 

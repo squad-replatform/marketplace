@@ -8,6 +8,10 @@ tipo_item: feat
 status: rascunho
 story_points: 0
 tema: ""
+phase: ""
+tdd: ""
+torres: []
+gate: quick
 depende_de: []
 relacionados: []
 autor: ""
@@ -16,43 +20,105 @@ data: ""
 
 # {{id}} — {{titulo}}
 
+> **Em uma frase:** <!-- Resultado entregue pelo dev — 1 linha acionável -->
+
 ## 1 Metadados
 
 | Campo | Valor |
 |-------|-------|
-| Status | rascunho |
-| Tipo | feat |
-| Estimativa | 0 SP |
-| Jira | — |
+| Work Item | — |
 | Epic / Tema | — |
-| Dependencias | — |
+| Status | rascunho |
+| Estimativa | 0 SP |
+| Fase / TDD | — |
+| Torre(s) / Componente | — |
+| Depends on / Blocks | — |
+| Gate / Testes | quick / unit |
 
 ## 2 Contexto
 
-<!-- Situacao atual, dor ou oportunidade que originou esta task. Referenciar o backlog e os docs de origem. -->
+<!-- Por que esta task existe (2–4 frases). Referenciar backlog e docs de origem. -->
+
+### Fora de escopo
+
+| Item | Dono |
+|------|------|
+| — | — |
 
 ## 3 Objetivo
 
-<!-- O que precisa ser realizado — resultado esperado, nao o como. -->
+<!-- Resultado esperado em 1 frase. Sem o "como". -->
 
-## 4 Requisitos tecnicos
+## 4 Requisitos e critérios de aceite
 
-<!-- Requisitos de implementacao de alto nivel. Sem file paths absolutos. -->
+### Requisitos funcionais
 
-- [ ] Requisito 1
+| ID | Requisito | Rastreio | Verificação |
+|----|-----------|----------|-------------|
+| FR-001 | O sistema MUST … | RN-xx | teste / cenário |
 
-## 5 Criterios de aceite
+### Cenários (opcional — tasks Core ou comportamento complexo)
 
-<!-- Comportamentos verificaveis que definem "pronto" para esta task especificamente. -->
+**US1 — título** `FR-001`
 
-- [ ] Criterio 1
+- **Given** … **When** … **Then** …
 
-## 6 Notas tecnicas
+### Casos limite
 
-<!-- Dependencias de outras tasks/torres, decisoes de design relevantes, links de referencia. -->
+| Condição | Comportamento esperado |
+|----------|------------------------|
+| — | — |
 
-## 7 Definition of Done
+## 5 Especificação técnica
 
-- [ ] Codigo revisado e aprovado
-- [ ] Testes automatizados passando (cobertura conforme thresholds do projeto)
-- [ ] Deploy validado em ambiente de homologacao
+<!-- Onde e como codar: arquivos, contratos, diagramas, decisões. Sem comandos bash. -->
+
+| # | Artefato | Path | Método / API | Alteração | FR | Teste |
+|---|----------|------|--------------|-----------|----|-------|
+| 1 | — | — | — | — | FR-001 | — |
+
+### Contrato mínimo (opcional)
+
+```json
+{}
+```
+
+## 6 Como executar
+
+<!-- Operação: repos, branch, semver, verify, armadilhas. Gitflow padrão no backlog §6. -->
+
+| Item | Valor |
+|------|-------|
+| Repositório(s) | — |
+| Branch | `feature/JGR-XXX` |
+| Classificação DDD | Supporting — 85% / 80% |
+
+### SemVer (se lib compartilhada)
+
+N/A — <!-- ou fluxo MINOR: domain → Nexus → bump consumidores -->
+
+### Verify
+
+```bash
+# comandos de teste local e harness
+```
+
+### Armadilhas
+
+- —
+
+**Primeiro passo:** <!-- ação literal para começar -->
+
+## 7 Dependências e referências
+
+- **Upstream:** —
+- **Downstream:** —
+- [Backlog](../backlog/backlog01.md) · [PRD](../prd/prd01.md) · [TDD](../tdd/tdd01.md)
+
+## 8 Definition of Done
+
+DoD global do tema: ver [backlog §6](../backlog/backlog01.md#6-definition-of-done-global).
+
+- [ ] Requisitos FR-00x verificados
+- [ ] Testes e gate do projeto passando
+- [ ] PR vinculado ao Work Item Jira
