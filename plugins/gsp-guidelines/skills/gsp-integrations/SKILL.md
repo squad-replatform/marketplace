@@ -137,7 +137,7 @@ ECR / ECS Fargate (microservicos Node e BFF GraphQL); Lambda (`commons-authorize
 
 ## Qualidade & contratos Pact
 
-SonarQube (149/151 projetos Node; torre 20 excluida no harness v1). ArcherySec (SAST) no PR. Pact Broker e contratos:
+SonarQube (149/151 projetos Node; torre 20 excluida do gate Sonar Node padrao). ArcherySec (SAST) no PR. Pact Broker e contratos:
 | Par | Status |
 |---|---|
 | cart-order-listener <- orders-api | Configurado |

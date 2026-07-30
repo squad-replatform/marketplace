@@ -44,7 +44,7 @@ BFF `frontend-supergraphql`: subgraphs `legacy` + `profile`. Estado: Zustand (`m
 
 ECS Fargate, ECR, Lambda (authorizer, parameters-listener), Secrets Manager, Parameter Store, S3. Auth Kong + Cognito/OAM.
 
-## Legado Java (20.capta) — fora do escopo Jest harness v1
+## Legado Java (20.capta) — fora do escopo Jest das torres Node
 
 | Aspecto | Stack |
 |---|---|

@@ -2,7 +2,7 @@
 
 Guidelines consolidados e autossuficientes da plataforma GSP (Global Sales Platform) da Natura: arquitetura event-driven, integracoes, convencoes de codigo, stack, padroes de teste, catalogo de torres (classificacao DDD) e divida tecnica. Inclui um comando e um agente para gerar apresentacoes de um sistema, torre ou projeto sob demanda.
 
-Todo o conteudo e reescrito inline neste plugin. Ele nao depende de nenhum arquivo fora de `gsp-guidelines/` (sem `.harness/`, sem `.specs/`, sem `towers/`).
+Todo o conteudo e reescrito inline neste plugin. Ele nao depende de nenhum arquivo fora de `gsp-guidelines/` (sem `.specs/`, sem `towers/`).
 
 ## O que faz
 

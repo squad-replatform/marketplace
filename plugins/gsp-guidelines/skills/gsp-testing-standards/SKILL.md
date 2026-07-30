@@ -33,11 +33,11 @@ Supporting processes                : 80%
 Generic   (todos)                   : 70%
 ```
 
-Notas por archetype: `domain` (regras puras) tende ao maior threshold por ser logica testavel; `infrastructure/routers/` e excluido. Enforcement atual: `test.json` define 50% global (baixo); o harness injeta 80%+ via `--config`. Politica de cobertura por sprint (codigo novo): Sprint 1-2 80%, 3-5 85%, 6-7 90%, 8+ 95% (SonarQube New Code Policy).
+Notas por archetype: `domain` (regras puras) tende ao maior threshold por ser logica testavel; `infrastructure/routers/` e excluido. Enforcement atual: `test.json` define 50% global (baixo); CI pode injetar 80%+ via `--config` Jest. Politica de cobertura por sprint (codigo novo): Sprint 1-2 80%, 3-5 85%, 6-7 90%, 8+ 95% (SonarQube New Code Policy).
 
 ## Excecoes por torre
 
-| Torre / projeto | Runner | Threshold projeto | Threshold harness | Notas |
+| Torre / projeto | Runner | Threshold projeto | Threshold policy DDD | Notas |
 |---|---|---|---|---|
 | 01.commons / commons-authorizer | Vitest 3 | 100% | 70% | Node >=22; fora do Jest padrao |
 | 01.commons / capta-proxy | Jest 29 | 0% | 80% | Gap critico de cobertura |
@@ -47,7 +47,7 @@ Notas por archetype: `domain` (regras puras) tende ao maior threshold por ser lo
 | 04.frontend / mfe-devkit, mfe-gsp | — | — | 80% | Sem suite propria |
 | 04.frontend / mfe-state | — | — | 80% | Cobertura via consumidor profile |
 | 04.frontend / frontend-parameters-listener | Jest | — | 85% | Unico Pact consumer SNS na torre |
-| 20.capta/captacao/* | Maven/JUnit | — | null | Fora de `harness.sh test` v1 |
+| 20.capta/captacao/* | Maven/JUnit | — | null | Legado Maven; sem runner Jest centralizado |
 | 20.capta/{gcp,promocao,cotas,box-mensagens} | Maven/Ant | — | null | Brownfield; sem enforcement |
 
 Libs npm MFE: politica observada e testar no consumidor (`mfe-profile`) quando a lib nao tem `npm test`.

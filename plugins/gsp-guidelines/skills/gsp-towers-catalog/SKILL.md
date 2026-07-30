@@ -34,7 +34,7 @@ Ao resolver uma torre, produza um registro neste formato. Campos sem fonte receb
 
 ## Core Domain — alta volatilidade
 
-Vantagem competitiva da Natura; muda com frequencia. Threshold harness: api/domain/repository 95%, listeners/processes 90%.
+Vantagem competitiva da Natura; muda com frequencia. Threshold (policy DDD): api/domain/repository 95%, listeners/processes 90%.
 
 | Torre | Ubiquitous Language | Por que e Core |
 |---|---|---|
@@ -49,7 +49,7 @@ Vantagem competitiva da Natura; muda com frequencia. Threshold harness: api/doma
 
 ## Supporting Subdomain — media volatilidade
 
-Essencial para operar o Core, mas nao diferenciador. Threshold harness: 80-85%.
+Essencial para operar o Core, mas nao diferenciador. Threshold (policy DDD): 80-85%.
 
 | Torre | Ubiquitous Language | Papel |
 |---|---|---|
@@ -62,7 +62,7 @@ Atencao: 07.showcase duplica logica de promocao de 12.promotion (ver `gsp-tech-d
 
 ## Generic Subdomain — baixa volatilidade
 
-Poderia ser produto off-the-shelf. Threshold harness: 70%.
+Poderia ser produto off-the-shelf. Threshold (policy DDD): 70%.
 
 | Torre | Ubiquitous Language | Papel |
 |---|---|---|
@@ -93,7 +93,7 @@ Total aproximado: ~151 projetos Node. Estrutura `src/` por archetype: ver `gsp-a
 
 ## Torre 20.capta (legado) — detalhe
 
-Monorepo Maven `captacao` (repo `capta-captacao`) + 4 repos satelite. SoR Oracle (`ST_*`, schemas USERCNT/USERCPT). JDK 1.6, WebLogic 10.3, Spring 3.x, GWT/Crux + JSP. Sem mensageria SNS/SQS no monorepo. Qualidade harness v1: `coverage: null`.
+Monorepo Maven `captacao` (repo `capta-captacao`) + 4 repos satelite. SoR Oracle (`ST_*`, schemas USERCNT/USERCPT). JDK 1.6, WebLogic 10.3, Spring 3.x, GWT/Crux + JSP. Sem mensageria SNS/SQS no monorepo. Sem enforcement de cobertura Jest (`coverage: null`).
 
 ### Familias de modulos
 | Familia | Modulos-chave | Papel |

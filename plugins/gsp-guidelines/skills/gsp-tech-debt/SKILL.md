@@ -20,16 +20,16 @@ Auditoria de 2026-06-19 (torres 01.commons, 04.frontend, 20.capta). Conteudo san
 
 ## Divida tecnica cross-cutting
 
-- sonar.exclusions amplos em products-api e orders-api cobrem `src/domain/**`, `src/infrastructure/repositories/**`, `services/**`, `aggregates/**` — exatamente a logica critica. Coverage reportada e ficticia. Fix: aplicar overrides do harness removendo exclusoes indevidas, torre por torre.
+- sonar.exclusions amplos em products-api e orders-api cobrem `src/domain/**`, `src/infrastructure/repositories/**`, `services/**`, `aggregates/**` — exatamente a logica critica. Coverage reportada e ficticia. Fix: remover exclusoes indevidas no Sonar, torre por torre.
 - Contratos de evento sem spec formal (AsyncAPI ausente): os ~130 tipos em `type-messages.js` nao tem schema; Pact foi reverse-engineered (bottom-up). 59 listeners sem contrato validado. Fix: criar `asyncapi.yaml` para eventos criticos (order-create, cart-convertion, availability-confirmed) e derivar Pact top-down.
-- `test.json` com threshold 50% e sem enforcement real; harness injeta 80% via `--config`, mas o fix permanente exige atualizar test.json + quality gate por projeto.
+- `test.json` com threshold 50% e sem enforcement real; CI pode injetar 80% via `--config` Jest, mas o fix permanente exige atualizar test.json + quality gate por projeto.
 - 149 workflows YAML individuais em `naturacode/workflows-application-config`: melhorias de CI exigem replicar em ~149 arquivos. Fix: Reusable Workflows por archetype.
 
 ## Por torre
 
 ### 01.commons
-- Node 20 (doc) vs Node 22 (authorizer): `harness.sh test` pode falhar sem nvm correto por projeto.
-- Coverage divergente: commons-authorizer 100% projeto vs 70% harness; capta-proxy 0% vs 80%.
+- Node 20 (doc) vs Node 22 (authorizer): `npm test` pode falhar sem nvm correto por projeto.
+- Coverage divergente: commons-authorizer 100% no `test.json` vs 70% da policy DDD Generic; capta-proxy 0% vs 80% esperado.
 - capta-proxy expoe Apollo subgraph nao federado no `supergraph-config.yaml` (gap produto vs codigo).
 - SNS error swallow: falhas ao publicar `cart-update` podem ser silenciadas.
 - automation-database: specs finas; parametros `hml` em secao `prd`.
@@ -43,7 +43,7 @@ Auditoria de 2026-06-19 (torres 01.commons, 04.frontend, 20.capta). Conteudo san
 - Eventos DOM cross-MFE sem contrato formal — acoplamento implicito via `window`.
 
 ### 20.capta
-- Fora do harness qualidade v1 (`coverage: null`); ~20 modulos Maven sem specs completas.
+- Sem enforcement de cobertura Jest/Sonar no legado (`coverage: null`); ~20 modulos Maven sem specs completas.
 - Java 6, dual Spring, god-module `captacao-negocio`; `captacao-persistencia` depende de `captaweb-coherence` (dependencia invertida).
 - Promo dual stack (legado `promocao` + GSP proxy F7).
 - Sem Pact HTTP/SOAP com capta-proxy: breaking changes invisiveis.
@@ -54,8 +54,7 @@ Auditoria de 2026-06-19 (torres 01.commons, 04.frontend, 20.capta). Conteudo san
 
 ## Areas frageis
 
-- `harness.sh test` falha silenciosamente sem `npm install` previo no projeto (sem verificacao defensiva).
-- `yaml_value()` em `harness.sh` retorna default silenciosamente quando js-yaml falta ou o YAML tem erro de sintaxe.
+- `npm test` em projeto sem `npm install` previo pode falhar silenciosamente (sem verificacao defensiva no script do projeto).
 
 ## Gaps de cobertura de teste
 
@@ -66,8 +65,6 @@ Auditoria de 2026-06-19 (torres 01.commons, 04.frontend, 20.capta). Conteudo san
 ## Riscos de seguranca (sanitizado)
 
 - JWT_SECRET hardcoded em `Environments.yaml` de `13.orders/orders-api` (ambiente dev): um valor de segredo aparece em plaintext (valor omitido aqui por seguranca — `***REDACTED***`). Producao usa `secretsManager://`. Recomendacao: mesmo em dev/qa, usar `parameter://` ou variavel de ambiente; remover o valor hardcoded do arquivo commitado.
-- Token OAuth no historico git do harness: durante o setup inicial, um token foi temporariamente embutido na URL do remote git (valor `***REDACTED***`). Foi removido apos o push e pode ja ter sido rotacionado. Recomendacao: verificar validade, revogar e regenerar se necessario; usar `gh auth setup-git` para evitar tokens em URLs.
-
 ## Dependencias em risco
 
 - Node.js v12 como runtime padrao do sistema vs v20 dos projetos: definir `nvm use 20` no shell profile.
